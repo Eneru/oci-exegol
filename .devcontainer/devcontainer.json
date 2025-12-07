@@ -1,0 +1,61 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Terraform and OCI CLI",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../Dockerfile"
+	},
+
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2":{
+			"moby": false
+		},
+		"ghcr.io/devcontainers-extra/features/act:1": {}
+	},
+
+	"postStartCommand": "pre-commit install && pre-commit autoupdate",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"HashiCorp.terraform",
+				"HashiCorp.HCL",
+				"4ops.terraform",
+				"tfsec.tfsec",
+				"redhat.ansible",
+				"redhat.vscode-yaml",
+				"exiasr.hadolint",
+				"GitHub.vscode-github-actions"
+			],
+			"settings": {
+				"files.associations": {
+					// Ansible
+					"**/defaults/**/*.yml": "yaml",
+					"**/group_vars/**/*": "yaml",
+					"**/host_vars/**/*": "yaml",
+					"**/vars/**/*.yml": "yaml",
+					"**/tasks/**/*.yml": "ansible",
+					"**/handlers/*.yml": "ansible",
+					"**/meta/*.yml": "yaml",
+					"**/roles/**/*.yml": "ansible",
+					"**/playbooks/**/*.yml": "ansible",
+					"**/ansible/**/hosts": "ini",
+					"**/ansible/**/inventory": "ini",
+					"**/ansible/**/templates/*.j2": "ansible-jinja",
+					"**/molecule/**/*.yml": "ansible",
+					"**/molecule/**/molecule.yml": "yaml",
+					"ansible/ansible.cfg": "ini",
+					"ansible/*.yml": "ansible"
+				},
+				"telemetry.enableTelemetry" : false,
+				"telemetry.feedback.enabled": false,
+				"telemetry.telemetryLevel": "off",
+				"redhat.telemetry.enabled": false
+			}
+		}
+	}
+}
